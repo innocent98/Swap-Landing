@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-white py-12 px-6 border-t border-gray-100">
+    <footer className="relative bg-white py-10 px-0 border-t border-gray-100">
       <div className="container mx-auto max-w-7xl">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-2 gap-12 mb-12">
@@ -12,10 +12,10 @@ const Footer = () => {
               Contact
             </h3>
             <div className="space-y-4">
-              <p className="font-sora text-base text-[#4a4a68]">
+              <p className="font-sora text-sm md:text-base text-[#4a4a68]">
                 hello@gosmileswap.com
               </p>
-              <p className="font-sora text-base text-[#4a4a68] leading-relaxed">
+              <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
                 1007 N Orange St. 4th Floor Ste<br />
                 1382, Wilmington, DE, USA 19801
               </p>
@@ -31,7 +31,7 @@ const Footer = () => {
               <div>
                 <a 
                   href="#" 
-                  className="font-sora text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
+                  className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Privacy Policy
                 </a>
@@ -39,7 +39,7 @@ const Footer = () => {
               <div>
                 <a 
                   href="#" 
-                  className="font-sora text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
+                  className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Terms of Use
                 </a>
@@ -47,7 +47,7 @@ const Footer = () => {
               <div>
                 <a 
                   href="#" 
-                  className="font-sora text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
+                  className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Cookie Policy
                 </a>

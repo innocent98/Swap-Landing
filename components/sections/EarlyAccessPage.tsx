@@ -43,7 +43,7 @@ const EarlyAccessPage = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 py-12 flex flex-col justify-center items-center">
+      <div className="container mx-auto px-6 py-6 flex flex-col justify-center items-center">
         <Image src='/smile.svg' alt='offer 2' width={80} height={80} className='rounded-[16px] mb-0' />
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Hero Content */}
@@ -52,7 +52,7 @@ const EarlyAccessPage = () => {
 
             {/* Hero Text */}
             <div>
-              <h1 className="font-sora text-3xl md:text-5xl lg:text-6xl font-bold text-[#1a1d3a] leading-tight mb-6">
+              <h1 className="font-sora text-2xl md:text-4xl lg:text-6xl font-bold text-[#1a1d3a] leading-tight mb-6">
                 Join the Future of{' '}
                 <span className="relative">
                   <span className="relative z-10">Currency</span>
@@ -64,7 +64,7 @@ const EarlyAccessPage = () => {
                   <div className="absolute -left-2 -right-2 top-0 bottom-0 bg-yellow-300/40 rotate-1 rounded-lg -z-0"></div>
                 </span>
               </h1>
-              <p className="font-sora text-lg text-[#4a4a68] leading-relaxed max-w-lg">
+              <p className="font-sora text-sm md:text-lg text-[#4a4a68] leading-relaxed max-w-lg">
                 Access a pool of businesses to swap your foreign currencies with, seamlessly and very secure powered by our advance escrow technology
               </p>
             </div>
@@ -88,7 +88,7 @@ const EarlyAccessPage = () => {
 
           {/* Right Side - Waitlist Form */}
           <div className="relative">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 relative z-10">
+            <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-10 relative z-10">
               {/* Smile Icon */}
               {/* <div className="flex justify-center mb-6">
                 <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center">
@@ -98,7 +98,7 @@ const EarlyAccessPage = () => {
 
               {/* Form Header */}
               <div className="text-center mb-8">
-                <h2 className="font-sora text-2xl font-bold text-[#1a1d3a] mb-2">
+                <h2 className="font-sora text-xl md:text-2xl font-bold text-[#1a1d3a] mb-2">
                   Be the First to Experience SmileSwap
                 </h2>
                 <p className="font-sora text-sm text-[#6b7280]">
@@ -209,9 +209,9 @@ const EarlyAccessPage = () => {
         </div>
 
         {/* Currency Ticker */}
-        <div className="mt-20 overflow-hidden">
+        <div className="w-full bg-gray-100 py-6 sm:py-8 overflow-hidden mt-6">
           <div className="flex animate-scroll whitespace-nowrap">
-            <div className="flex items-center gap-12 text-gray-200 font-sora text-5xl font-bold">
+            <div className="flex items-center gap-6 sm:gap-8 md:gap-12 text-gray-300 font-sora text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
               <span>NGN</span>
               <span>•</span>
               <span>USD</span>
@@ -243,7 +243,7 @@ const EarlyAccessPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="relative bg-white/50 backdrop-blur-sm py-12 px-6 mt-20">
+      <footer className="relative bg-white/50 backdrop-blur-sm py-6 px-0 mt-0">
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 gap-12 mb-12">
             {/* Left Column - Contact */}
@@ -252,10 +252,10 @@ const EarlyAccessPage = () => {
                 Contact
               </h3>
               <div className="space-y-4">
-                <p className="font-sora text-base text-[#4a4a68]">
+                <p className="font-sora text-sm md:text-base text-[#4a4a68]">
                   hello@gosmileswap.com
                 </p>
-                <p className="font-sora text-base text-[#4a4a68] leading-relaxed">
+                <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
                   1007 N Orange St. 4th Floor Ste<br />
                   1382, Wilmington, DE, USA 19801
                 </p>
@@ -269,17 +269,17 @@ const EarlyAccessPage = () => {
               </h3>
               <div className="space-y-3">
                 <div>
-                  <a href="#" className="font-sora text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
+                  <a href="#" className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
                     Privacy Policy
                   </a>
                 </div>
                 <div>
-                  <a href="#" className="font-sora text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
+                  <a href="#" className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
                     Terms of Use
                   </a>
                 </div>
                 <div>
-                  <a href="#" className="font-sora text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
+                  <a href="#" className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
                     Cookie Policy
                   </a>
                 </div>
