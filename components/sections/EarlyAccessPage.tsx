@@ -161,7 +161,7 @@ const EarlyAccessPage = () => {
                   {/* Submit Button */}
                   <Button
                     type="submit"
-                    className="w-full bg-gray-200 text-gray-400 hover:bg-gray-300 font-archivo py-6 rounded-xl text-base font-semibold mt-8"
+                    className="w-full bg-primary text-white hover:bg-primary font-archivo py-6 rounded-xl text-base font-semibold mt-8"
                     disabled={!formData.name || !formData.email || !formData.userType}
                   >
                     Continue
