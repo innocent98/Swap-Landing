@@ -29,24 +29,24 @@ const Footer = () => {
             </h3>
             <div className="space-y-3">
               <div>
-                <a 
-                  href="#" 
+                <a
+                  href="/privacy-policy"
                   className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Privacy Policy
                 </a>
               </div>
               <div>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Terms of Use
                 </a>
               </div>
               <div>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Cookie Policy

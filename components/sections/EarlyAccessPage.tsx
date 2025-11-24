@@ -1,5 +1,22 @@
 'use client';
 
+/**
+ * Early Access Waitlist Page
+ *
+ * This component integrates with Google Forms for waitlist submissions.
+ *
+ * Google Form Details:
+ * - Form URL: https://forms.gle/yGhD7fZnU8GyCuqy8
+ * - Submission Endpoint: https://docs.google.com/forms/d/e/1FAIpQLSeyq2xnQq8b1L8DBhlE1HLR0u7zgn_hIAwc54jRQeLPFMA3jQ/formResponse
+ *
+ * Field Mappings (verified from actual form submission):
+ * - entry.730138085 -> User Type (Individual/Business)
+ * - entry.1357895843 -> Name
+ * - emailAddress -> Email (Google Forms uses special parameter for email)
+ *
+ * Note: The form UI is maintained but now submits to Google Forms backend using hidden iframe approach.
+ */
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SmileOutlined } from '@ant-design/icons';
 import { User, Mail, Users, Share2, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,10 +38,75 @@ const EarlyAccessPage = () => {
     userType: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Google Form submission endpoint
+      const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeyq2xnQq8b1L8DBhlE1HLR0u7zgn_hIAwc54jRQeLPFMA3jQ/formResponse';
+
+      // Create hidden iframe to receive the response
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.name = 'hidden_iframe';
+
+      let isFirstLoad = true;
+
+      // Handle iframe load event - this fires after form submission completes
+      iframe.onload = () => {
+        // Skip the first load (when iframe is initially created)
+        if (isFirstLoad) {
+          isFirstLoad = false;
+          return;
+        }
+
+        // Form submitted successfully
+        setIsSubmitted(true);
+        setIsSubmitting(false);
+
+        // Clean up after a delay
+        setTimeout(() => {
+          if (document.body.contains(form)) document.body.removeChild(form);
+          if (document.body.contains(iframe)) document.body.removeChild(iframe);
+        }, 1000);
+      };
+
+      document.body.appendChild(iframe);
+
+      // Create form element
+      const form = document.createElement('form');
+      form.action = formUrl;
+      form.method = 'POST';
+      form.target = 'hidden_iframe';
+
+      // Add form fields with correct field IDs
+      const fields = {
+        'entry.730138085': formData.userType === 'individual' ? 'Individual' : 'Business',
+        'entry.1357895843': formData.name,
+        'emailAddress': formData.email
+      };
+
+      Object.entries(fields).forEach(([name, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('Something went wrong. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -107,8 +188,15 @@ const EarlyAccessPage = () => {
               </div>
 
               {!isSubmitted ? (
-                /* Waitlist Form */
+                /* Waitlist Form - Now integrated with Google Forms */
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Error Message */}
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                      <p className="font-sora text-sm text-red-800">{error}</p>
+                    </div>
+                  )}
+
                   {/* Name Input */}
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
@@ -121,6 +209,7 @@ const EarlyAccessPage = () => {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="pl-12"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -136,6 +225,7 @@ const EarlyAccessPage = () => {
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="pl-12"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -147,6 +237,7 @@ const EarlyAccessPage = () => {
                     <Select
                       value={formData.userType}
                       onValueChange={(value) => setFormData({ ...formData, userType: value })}
+                      disabled={isSubmitting}
                     >
                       <SelectTrigger className="pl-12">
                         <SelectValue placeholder="User Type" />
@@ -162,9 +253,9 @@ const EarlyAccessPage = () => {
                   <Button
                     type="submit"
                     className="w-full bg-primary text-white hover:bg-primary font-archivo py-6 rounded-xl text-base font-semibold mt-8"
-                    disabled={!formData.name || !formData.email || !formData.userType}
+                    disabled={!formData.name || !formData.email || !formData.userType || isSubmitting}
                   >
-                    Continue
+                    {isSubmitting ? 'Submitting...' : 'Continue'}
                   </Button>
                 </form>
               ) : (
@@ -269,7 +360,7 @@ const EarlyAccessPage = () => {
               </h3>
               <div className="space-y-3">
                 <div>
-                  <a href="#" className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
+                  <a href="/privacy-policy" className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors">
                     Privacy Policy
                   </a>
                 </div>
