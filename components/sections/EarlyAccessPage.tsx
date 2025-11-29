@@ -17,7 +17,7 @@
  * Note: The form UI is maintained but now submits to Google Forms backend using hidden iframe approach.
  */
 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -40,6 +40,21 @@ const EarlyAccessPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [isBlinking, setIsBlinking] = useState(false);
+
+  useEffect(() => {
+    const blinkInterval = 2000; // 2 seconds
+
+    const triggerBlink = () => {
+      setIsBlinking(true);
+      setTimeout(() => setIsBlinking(false), 200); // Blink duration: 200ms
+    };
+
+    // Blink every 2 seconds
+    const interval = setInterval(triggerBlink, blinkInterval);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,14 +133,22 @@ const EarlyAccessPage = () => {
             <Image src='/logo.svg' alt='offer 2' width={80} height={80} className='rounded-[16px]' />
           </div>
         </Link>
-        <Button className="bg-[#1a1d3a] text-white hover:bg-[#2a2d4a] font-archivo px-6 py-2 rounded-full">
-          Features
-        </Button>
+        <Link href="/#features">
+          <Button className="bg-[#1a1d3a] text-white hover:bg-[#2a2d4a] font-archivo px-6 py-2 rounded-full">
+            Features
+          </Button>
+        </Link>
       </nav>
 
       {/* Main Content */}
       <div className="container mx-auto px-6 py-6 flex flex-col justify-center items-center">
-        <Image src='/smile.svg' alt='offer 2' width={80} height={80} className='rounded-[16px] mb-0' />
+        <Image
+          src='/smile.svg'
+          alt='offer 2'
+          width={80}
+          height={80}
+          className={`rounded-[16px] mb-0 transition-opacity duration-200 ${isBlinking ? 'opacity-0' : 'opacity-100'}`}
+        />
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Hero Content */}
           <div className="space-y-8">
@@ -270,7 +293,7 @@ const EarlyAccessPage = () => {
                           Great!
                         </h3>
                         <p className="font-sora text-sm text-green-800">
-                          You've secured spot number 20 on our waitlist!
+                          You've secured a spot on our waitlist!
                         </p>
                       </div>
                     </div>
@@ -344,11 +367,13 @@ const EarlyAccessPage = () => {
               </h3>
               <div className="space-y-4">
                 <p className="font-sora text-sm md:text-base text-[#4a4a68]">
-                  hello@gosmileswap.com
+                  hello@smileswap.app
                 </p>
                 <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
-                  1007 N Orange St. 4th Floor Ste<br />
-                  1382, Wilmington, DE, USA 19801
+                  Delaware, USA
+                </p>
+                <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
+                  Uyo, Nigeria
                 </p>
               </div>
             </div>
@@ -383,13 +408,23 @@ const EarlyAccessPage = () => {
             <p className="font-sora text-sm text-[#4a4a68]">
               © 2025 smileswap. All right reserved.
             </p>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
-                <span className="text-2xl">🇳🇬</span>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+                  <span className="text-2xl">🇺🇸</span>
+                </div>
+                <span className="font-sora text-base text-[#1a1d3a] font-medium">
+                  USA
+                </span>
               </div>
-              <span className="font-sora text-base text-[#1a1d3a] font-medium">
-                Nigeria
-              </span>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+                  <span className="text-2xl">🇳🇬</span>
+                </div>
+                <span className="font-sora text-base text-[#1a1d3a] font-medium">
+                  Nigeria
+                </span>
+              </div>
             </div>
           </div>
         </div>

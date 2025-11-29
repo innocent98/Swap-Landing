@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Footer = () => {
   return (
     <footer className="relative bg-white py-10 px-0 border-t border-gray-100">
@@ -13,11 +11,13 @@ const Footer = () => {
             </h3>
             <div className="space-y-4">
               <p className="font-sora text-sm md:text-base text-[#4a4a68]">
-                hello@gosmileswap.com
+                hello@smileswap.app
               </p>
               <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
-                1007 N Orange St. 4th Floor Ste<br />
-                1382, Wilmington, DE, USA 19801
+                Delaware, USA
+              </p>
+              <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
+                Uyo, Nigeria
               </p>
             </div>
           </div>
@@ -38,7 +38,7 @@ const Footer = () => {
               </div>
               <div>
                 <a
-                  href="#"
+                  href="/terms-of-use"
                   className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Terms of Use
@@ -46,7 +46,7 @@ const Footer = () => {
               </div>
               <div>
                 <a
-                  href="#"
+                  href="/cookie-policy"
                   className="font-sora text-sm md:text-base text-[#4a4a68] hover:text-[#1a1d3a] transition-colors"
                 >
                   Cookie Policy
@@ -64,13 +64,23 @@ const Footer = () => {
           </p>
 
           {/* Country Selector */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
-              <span className="text-2xl">🇳🇬</span>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+                <span className="text-2xl">🇺🇸</span>
+              </div>
+              <span className="font-sora text-base text-[#1a1d3a] font-medium">
+                USA
+              </span>
             </div>
-            <span className="font-sora text-base text-[#1a1d3a] font-medium">
-              Nigeria
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gray-100">
+                <span className="text-2xl">🇳🇬</span>
+              </div>
+              <span className="font-sora text-base text-[#1a1d3a] font-medium">
+                Nigeria
+              </span>
+            </div>
           </div>
         </div>
       </div>

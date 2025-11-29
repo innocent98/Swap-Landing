@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const OfferSection = () => {
   return (
-    <section className="relative bg-[#1a1d3a] py-10 px-0 overflow-hidden">
+    <section id="features" className="relative bg-[#1a1d3a] py-10 px-0 overflow-hidden">
       <div className="container mx-auto max-w-full">
         {/* Section Header */}
         <div className="mb-16">

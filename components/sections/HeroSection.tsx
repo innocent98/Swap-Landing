@@ -1,10 +1,28 @@
-import React from 'react';
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { SmileOutlined, ThunderboltFilled } from '@ant-design/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const HeroSection = () => {
+  const [isBlinking, setIsBlinking] = useState(false);
+
+  useEffect(() => {
+    const blinkInterval = 2000; // 2 seconds
+
+    const triggerBlink = () => {
+      setIsBlinking(true);
+      setTimeout(() => setIsBlinking(false), 200); // Blink duration: 200ms
+    };
+
+    // Blink every 2 seconds
+    const interval = setInterval(triggerBlink, blinkInterval);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Navigation */}
@@ -17,11 +35,13 @@ const HeroSection = () => {
             <SmileOutlined className="text-xl text-navy" />
             <span className="font-sora text-lg font-semibold text-navy">eswap</span> */}
           </div>
-          <Button
-            className="hidden sm:flex bg-navy text-white hover:bg-navy-light font-archivo px-4 sm:px-6 py-2 rounded-full text-sm"
-          >
-            Features
-          </Button>
+          <Link href="#features">
+            <Button
+              className="hidden sm:flex bg-navy text-white hover:bg-navy-light font-archivo px-4 sm:px-6 py-2 rounded-full text-sm"
+            >
+              Features
+            </Button>
+          </Link>
         </div>
 
         {/* CTA Button */}
@@ -41,11 +61,17 @@ const HeroSection = () => {
       {/* Hero Content */}
       <div className="container mx-auto px-6 pt-20 pb-32 relative z-10">
         <div className="text-center max-w-5xl mx-auto justify-center flex flex-col items-center">
-          <Image src='/smile.svg' alt='offer 2' width={80} height={80} className='rounded-[16px] mb-8' />
+          <Image
+            src='/smile.svg'
+            alt='offer 2'
+            width={80}
+            height={80}
+            className={`rounded-[16px] mb-8 transition-opacity duration-200 ${isBlinking ? 'opacity-0' : 'opacity-100'}`}
+          />
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-green-badge/20 text-green-800 px-4 py-2 rounded-full mb-8">
             <ThunderboltFilled className="text-green-600" />
-            <span className="font-sora text-sm font-medium">SmileSwap is Coming Soon!</span>
+            <span className="font-sora text-sm font-medium">Smileswap is Coming Soon!</span>
           </div>
 
           {/* Main Heading */}

@@ -11,9 +11,10 @@ const sections = [
     id: 'introduction',
     title: '1. Introduction',
     content: [
+      // in partnership with Smiletech Transnational Ltd
       {
         heading: 'Purpose of this Privacy Policy',
-        text: 'Cubbiccle Inc ("Company", "We", "Us" or "Our") in partnership with Smiletech Transnational Ltd respects your privacy and is committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and/or use our mobile application (regardless of where you visit it from) and tell you about your privacy rights and how the law protects you.',
+        text: 'Cubbiccle Inc ("Company", "We", "Us" or "Our") respects your privacy and is committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and/or use our mobile application (regardless of where you visit it from) and tell you about your privacy rights and how the law protects you.',
       },
       {
         heading: 'Scope',
@@ -204,9 +205,10 @@ const PrivacyPolicyPage = () => {
 
         {/* Introduction Banner */}
         <div className="bg-white rounded-3xl shadow-lg p-6 md:p-8 mb-8 border-l-4 border-primary">
+          {/* in
+            partnership with <span className="font-semibold text-[#1a1d3a]">Smiletech Transnational Ltd</span>{' '} */}
           <p className="font-sora text-sm md:text-base text-[#4a4a68] leading-relaxed">
-            This Privacy Policy explains how <span className="font-semibold text-[#1a1d3a]">Cubbiccle Inc</span> in
-            partnership with <span className="font-semibold text-[#1a1d3a]">Smiletech Transnational Ltd</span>{' '}
+            This Privacy Policy explains how <span className="font-semibold text-[#1a1d3a]">Cubbiccle Inc</span> {' '}
             (collectively "Smileswap App", "we", "us" or "our") collects, uses, and protects your personal information
             when you use our mobile application and website.
           </p>
