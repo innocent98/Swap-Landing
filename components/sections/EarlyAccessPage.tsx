@@ -27,7 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { User, Mail, Users, Share2, CheckCircle2 } from 'lucide-react';
+import { User, Mail, Users, Share2, CheckCircle2, Copy, Twitter, Facebook, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -41,6 +41,7 @@ const EarlyAccessPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [isBlinking, setIsBlinking] = useState(false);
+  const [showShareOptions, setShowShareOptions] = useState(false);
 
   useEffect(() => {
     const blinkInterval = 2000; // 2 seconds
@@ -55,6 +56,58 @@ const EarlyAccessPage = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleShare = async () => {
+    const shareUrl = window.location.origin + '/early-access';
+    const shareText = 'Join me on the SmileSwap waitlist! Be the first to experience the future of currency exchange.';
+
+    // Check if Web Share API is available (mobile devices)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'SmileSwap Early Access',
+          text: shareText,
+          url: shareUrl,
+        });
+      } catch (err) {
+        // User cancelled or error occurred
+        console.log('Share cancelled or failed:', err);
+      }
+    } else {
+      // Fallback: show share options
+      setShowShareOptions(!showShareOptions);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    const shareUrl = window.location.origin + '/early-access';
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      alert('Link copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  const shareOnTwitter = () => {
+    const shareUrl = window.location.origin + '/early-access';
+    const shareText = 'Join me on the SmileSwap waitlist! Be the first to experience the future of currency exchange.';
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+    window.open(twitterUrl, '_blank');
+  };
+
+  const shareOnFacebook = () => {
+    const shareUrl = window.location.origin + '/early-access';
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+    window.open(facebookUrl, '_blank');
+  };
+
+  const shareOnWhatsApp = () => {
+    const shareUrl = window.location.origin + '/early-access';
+    const shareText = 'Join me on the SmileSwap waitlist! Be the first to experience the future of currency exchange.';
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -300,10 +353,52 @@ const EarlyAccessPage = () => {
                   </div>
 
                   {/* Share Button */}
-                  <Button className="w-full bg-[#0f0f2e] text-white hover:bg-[#1a1d3a] font-archivo py-6 rounded-xl text-base font-semibold flex items-center justify-center gap-2">
+                  <Button
+                    onClick={handleShare}
+                    className="w-full bg-[#0f0f2e] text-white hover:bg-[#1a1d3a] font-archivo py-6 rounded-xl text-base font-semibold flex items-center justify-center gap-2"
+                  >
                     <Share2 className="w-5 h-5" />
                     Get Friends on the List
                   </Button>
+
+                  {/* Share Options (shown when Web Share API is not available) */}
+                  {showShareOptions && (
+                    <div className="bg-gray-50 rounded-xl p-4 space-y-3">
+                      <p className="font-sora text-sm text-gray-600 text-center mb-3">
+                        Share via:
+                      </p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button
+                          onClick={shareOnTwitter}
+                          className="flex items-center justify-center gap-2 bg-[#1DA1F2] text-white px-4 py-3 rounded-lg hover:bg-[#1a8cd8] transition-colors"
+                        >
+                          <Twitter className="w-4 h-4" />
+                          <span className="font-sora text-sm">Twitter</span>
+                        </button>
+                        <button
+                          onClick={shareOnFacebook}
+                          className="flex items-center justify-center gap-2 bg-[#1877F2] text-white px-4 py-3 rounded-lg hover:bg-[#166fe5] transition-colors"
+                        >
+                          <Facebook className="w-4 h-4" />
+                          <span className="font-sora text-sm">Facebook</span>
+                        </button>
+                        <button
+                          onClick={shareOnWhatsApp}
+                          className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-lg hover:bg-[#20bd5a] transition-colors"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          <span className="font-sora text-sm">WhatsApp</span>
+                        </button>
+                        <button
+                          onClick={copyToClipboard}
+                          className="flex items-center justify-center gap-2 bg-gray-700 text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+                        >
+                          <Copy className="w-4 h-4" />
+                          <span className="font-sora text-sm">Copy Link</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
